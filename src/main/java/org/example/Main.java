@@ -18,7 +18,7 @@ public class Main {
 
         try {
             // Cargar reglas desde un archivo CLIPS
-            sistemaRecomendacion.cargarReglas("Data/reglas-optativa-java.clp");
+            sistemaRecomendacion.cargarReglas("Data/r-clips.clp");
 
             // Leer datos de playas desde un archivo o fuente de datos
             List<Playa> playas = leerDatosPlayas();

@@ -32,9 +32,20 @@ public class RecomendacionSBR {
                         playa.getLongitud(), playa.getTipo(), playa.getTipoArea(), coordenadas
                 );
 
+                String assertCommand2 = String.format(
+                        "(Playa (provincia \"%s\") (codigo-provincia \"%s\") (concello \"%s\") " +
+                                "(codigo-concello \"%s\") (nombre \"%s\") (lugar-parroquia \"%s\") (longitud \"%s\") " +
+                                "(tipo \"%s\") (tipo-arena \"%s\") (coordenadas \"%s\"))",
+                        playa.getProvincia(), playa.getCodigoProvincia(), playa.getConcello(),
+                        playa.getCodigoConcello(), playa.getNombre(), playa.getLugarParroquia(),
+                        playa.getLongitud(), playa.getTipo(), playa.getTipoArea(), coordenadas
+                );
+
+                System.out.println(assertCommand2);
+
                 // Ejecutar el comando CLIPS para insertar la instancia de Playa
                 clips.eval(assertCommand);
-                System.out.println("Playa insertada: " + playa.getNombre());
+                //System.out.println("Playa insertada: " + playa.getNombre());
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
@@ -43,10 +54,15 @@ public class RecomendacionSBR {
         }
     }
 
+    public void limpiarDatos() throws CLIPSException {
+        clips.clear();
+    }
     public void ejecutarSistemaRecomendacion(List<Playa> playas) throws CLIPSException {
         clips.reset();
         cargarDatosPlayas(playas);
         clips.run();
+
+        //
     }
 
     // Otros métodos según sea necesario
