@@ -1,0 +1,41 @@
+(deftemplate Playa
+   (slot provincia)
+   (slot codigo-provincia)
+   (slot concello)
+   (slot codigo-concello)
+   (slot nombre)
+   (slot lugar-parroquia)
+   (slot longitud)
+   (slot tipo)
+   (slot tipo-arena)
+   (slot coordenadas)
+)
+
+(deftemplate Usuario
+   (slot username)
+   (slot provincia)
+)
+
+(defrule Registro
+   "Regla para preguntar el nombre de usuario"
+   (declare (salience 10))
+   =>
+   (printout t "¿Cuál es tu nombre de usuario? ")
+   (bind ?respuesta (read))
+   (assert (Usuario (username ?respuesta)))
+)
+
+(defrule Bienvenida
+   "Regla para mostrar un mensaje de bienvenida"
+   ?usuario <- (Usuario (username ?username))
+   =>
+   (printout t "Bienvenido " ?username " al Sistema de Recomendación Basado en Reglas (SBR)." crlf)
+   (printout t "------------------------------" crlf)
+)
+
+(defrule Despedida
+   "Regla para mostrar un mensaje de despedida"
+   =>
+   (printout t "------------------------------" crlf)
+   (printout t "Gracias por usar el SBR. Hasta pronto!" crlf)
+)
