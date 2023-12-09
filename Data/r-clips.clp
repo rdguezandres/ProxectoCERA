@@ -17,6 +17,7 @@
 )
 
 (deffacts BHInicial
+
 (Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "A Salsa ") (lugar-parroquia "Repibelo") (longitud "20") (tipo "Praia resgardada") (tipo-arena "Cantos rodados") (coordenadas "43.320.555, -8.525.277"))
 (Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Area Grande ou Valcovo") (lugar-parroquia "Valcovo - Arteixo (Santiago)") (longitud "300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.315.444, -8.533.555"))
 (Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15143") (nombre "Area Grande de Suevos") (lugar-parroquia "Suevos") (longitud "20") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.335.271, -848.791"))
