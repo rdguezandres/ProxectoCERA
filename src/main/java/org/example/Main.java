@@ -1,4 +1,5 @@
 package org.example;
+
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
@@ -8,8 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import net.sf.clipsrules.jni.*;
-import java.util.*;
 
 public class Main {
     private static Environment clips;
@@ -32,7 +31,7 @@ public class Main {
             PrepararDatosPlayas(playas);
 
             // Preparar filtro
-            String selecProvincia = "lugo";
+            String selecProvincia = "pontevedra";
             String selecTipoArena = "fina";
             String selecTipo = "abierta";
             String selecLongitud = "corta";
@@ -46,16 +45,32 @@ public class Main {
         }
     }
 
+    public static String clasificarPoboacion(Integer poboacion) {
+        String tamanho = "p";
+        if (poboacion > 0 && poboacion <= 10000) {
+            tamanho = "p";
+        } else if (poboacion > 10000 && poboacion <= 25000) {
+            tamanho = "m";
+        } else if (poboacion > 25000) {
+            tamanho = "g";
+        }
+        return tamanho;
+    }
+
     public static void PrepararDatosPlayas(List<Playa> playas) throws CLIPSException {
         // Iterar sobre la lista de playas
         for (Playa playa : playas) {
             try {
+                // Definir tamaño de concello segundo poboación
+                String tamanho = clasificarPoboacion(playa.getPoboacion());
+
                 String assertCommand = String.format(
                         "(Playa (provincia \"%s\") (concello \"%s\") (nombre \"%s\") (lugar-parroquia \"%s\") (longitud \"%s\") " +
-                                "(tipo \"%s\") (tipo-arena \"%s\"))",
-                        playa.getProvincia(), playa.getConcello(),playa.getNombre(), playa.getLugarParroquia(),
-                        playa.getLongitud(), playa.getTipo(), playa.getTipoArea()
+                                "(tipo \"%s\") (tipo-arena \"%s\") (poboacion %s))",
+                        playa.getProvincia(), playa.getConcello(), playa.getNombre(), playa.getLugarParroquia(),
+                        playa.getLongitud(), playa.getTipo(), playa.getTipoArea(), tamanho
                 );
+                //System.out.println(assertCommand);
                 clips.assertString(assertCommand);
 
             } catch (Exception e) {

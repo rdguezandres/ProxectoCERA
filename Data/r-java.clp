@@ -6,6 +6,7 @@
    (slot longitud (default nil))
    (slot tipo (default nil))
    (slot tipo-arena (default nil))
+   (slot poboacion (default nil))
 )
 
 (deftemplate Preferencias
@@ -13,6 +14,7 @@
    (slot longitud (allowed-symbols corta media larga nil) (default nil))
    (slot tipo (allowed-symbols resguardada abierta nil) (default nil))
    (slot tipo-arena (allowed-symbols cantos fina grosa nil) (default nil))
+   (slot poboacion (allowed-symbols p m g nil) (default nil))
    (multislot playa-r (default nil))
 )
 
@@ -157,10 +159,20 @@
    (modify ?p (playa-r $?playas ?x))
 )
 
-(defrule RecomendarACoruna_F_R_M
+; +4 OPCIÓNS - PREGUNTAR POR CONCELLO
+(defrule RecomendarACoruna_F_R_M_1
+   "Regla para preguntar por población playa en A Coruña con arena fina, resguardada y mediana"
+   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud media) (poboacion nil) (playa-r $?playas))
+   =>
+   (printout t "¿Prefieres un concello pequeño (p), mediano (m) o grande (g)? ")
+   (bind ?respuesta (read))
+   (modify ?p (poboacion ?respuesta))
+)
+
+(defrule RecomendarACoruna_F_R_M_2
    "Regla para recomendar playa en A Coruña con arena fina, resguardada y mediana"
-   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud media) (playa-r $?playas))
-   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Media"))
+   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud media) (poboacion ?pob) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Media") (poboacion ?pob))
    (test (not (member$ ?x ?playas)))
    =>
    (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
@@ -218,7 +230,7 @@
    (modify ?p (playa-r $?playas ?x))
 )
 
-(defrule RecomendarLugo_A_M
+(defrule RecomendarLugo_A_L
    "Regla para recomendar playa en Lugo del tipo abierta y longitud media"
    ?p <- (Preferencias (provincia lugo) (tipo abierta) (longitud larga) (playa-r $?playas))
    ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Lugo") (tipo "Praia aberta") (longitud "Larga"))
@@ -303,20 +315,38 @@
 )
 
 ; Area fina - Resguardada
-(defrule RecomendarPontevedra_F_R_C
-   "Regla para recomendar playa en Pontevedra del tipo fina, resguardada y corta"
-   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud corta) (playa-r $?playas))
-   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Corta"))
+(defrule RecomendarPontevedra_F_R_C_1
+   "Regla para preguntar por población playa en Pontevedra con arena fina, abierta y mediana"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud corta) (poboacion nil) (playa-r $?playas))
+   =>
+   (printout t "¿Prefieres un concello pequeño (p), mediano (m) o grande (g)? ")
+   (bind ?respuesta (read))
+   (modify ?p (poboacion ?respuesta))
+)
+
+(defrule RecomendarPontevedra_F_R_C_2
+   "Regla para recomendar playa en Pontevedra del tipo fina, abierta y media"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud corta) (poboacion ?pob) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Corta") (poboacion ?pob))
    (test (not (member$ ?x ?playas)))
    =>
    (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
    (modify ?p (playa-r $?playas ?x))
 )
 
-(defrule RecomendarPontevedra_F_R_M
-   "Regla para recomendar playa en Pontevedra del tipo fina, resguardada y media"
-   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud media) (playa-r $?playas))
-   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Media"))
+(defrule RecomendarPontevedra_F_R_M_1
+   "Regla para preguntar por población playa en Pontevedra con arena fina, abierta y mediana"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud media) (poboacion nil) (playa-r $?playas))
+   =>
+   (printout t "¿Prefieres un concello pequeño (p), mediano (m) o grande (g)? ")
+   (bind ?respuesta (read))
+   (modify ?p (poboacion ?respuesta))
+)
+
+(defrule RecomendarPontevedra_F_R_M_2
+   "Regla para recomendar playa en Pontevedra del tipo fina, abierta y media"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud media) (poboacion ?pob) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Media") (poboacion ?pob))
    (test (not (member$ ?x ?playas)))
    =>
    (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
