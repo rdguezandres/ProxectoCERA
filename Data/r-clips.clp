@@ -1,134 +1,423 @@
 (deftemplate Playa
-   (slot provincia)
-   (slot codigo-provincia)
-   (slot concello)
-   (slot codigo-concello)
-   (slot nombre)
-   (slot lugar-parroquia)
-   (slot longitud)
-   (slot tipo)
-   (slot tipo-arena)
-   (slot coordenadas)
+   (slot provincia (default nil))
+   (slot concello (default nil))
+   (slot nombre (default nil))
+   (slot lugar-parroquia (default nil))
+   (slot longitud (default nil))
+   (slot tipo (default nil))
+   (slot tipo-arena (default nil))
 )
 
-(deftemplate Usuario
-   (slot username)
-   (slot provincia)
+(deftemplate Preferencias
+   (slot provincia (allowed-symbols lugo corunha ourense pontevedra nil) (default nil))
+   (slot longitud (allowed-symbols corta media larga nil) (default nil))
+   (slot tipo (allowed-symbols resguardada abierta nil) (default nil))
+   (slot tipo-arena (allowed-symbols cantos fina grosa nil) (default nil))
+   (multislot playa-r (default nil))
 )
 
-(deffacts BHInicial
+(defrule PreguntarProvincia
+   "Regla para preguntar la provincia al usuario"
+   (declare (salience 10))
+   ?x <- (Preferencias (provincia nil) (playa-r nil))
+   =>
+   (printout t "¿En qué provincia te gustaría encontrar una playa? ")
+   (bind ?respuesta (read))
+   (modify ?x (provincia ?respuesta))
+)
 
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "A Salsa ") (lugar-parroquia "Repibelo") (longitud "20") (tipo "Praia resgardada") (tipo-arena "Cantos rodados") (coordenadas "43.320.555, -8.525.277"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Area Grande ou Valcovo") (lugar-parroquia "Valcovo - Arteixo (Santiago)") (longitud "300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.315.444, -8.533.555"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15143") (nombre "Area Grande de Suevos") (lugar-parroquia "Suevos") (longitud "20") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.335.271, -848.791"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Area Pequena - A Hucha") (lugar-parroquia "Arteixo - Arteixo (Santiago)") (longitud "90") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.317.583, -853.011"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Areal das Combouzas ") (lugar-parroquia "Barranhan - Barranhan (San Xian)") (longitud "300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.312.667, -8.544.277"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Areal de Barranhan") (lugar-parroquia "Barranhan - Barranhan (San Xian)") (longitud "1200") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.311.556, -8.552"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Areal do Reiro") (lugar-parroquia "Arteixo") (longitud "50") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.311.889, -8.559.806"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Arteixo") (codigo-concello "15005") (nombre "Sabon") (lugar-parroquia "Sabon - Oseiro (San Tirso)") (longitud "900") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.327.694, -8.508.833"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Bergondo") (codigo-concello "15008") (nombre "Gandario") (lugar-parroquia "Gandario - Ouces (San Xoan)") (longitud "800") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.342.715, -82.424.927"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Camarinhas") (codigo-concello "15016") (nombre "Arou") (lugar-parroquia "Arou - Camelle (O Espirito Santo)") (longitud "400") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.184.723, -9.105"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Carballo") (codigo-concello "15019") (nombre "Baldaio-Sainhas") (lugar-parroquia "") (longitud "3600") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.298.027, -8.680.305"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Carballo") (codigo-concello "15019") (nombre "Pedra do Sal") (lugar-parroquia "") (longitud "3600") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.301.889, -8.658.278"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Carballo") (codigo-concello "15019") (nombre "Razo") (lugar-parroquia "Razo da Costa - Razo (San Marti�o)") (longitud "1300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.289.696, -8.708.778"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "A Corunha") (codigo-concello "15030") (nombre "As Lapas") (lugar-parroquia "Paseo Maritimo") (longitud "70") (tipo "Praia resgardada") (tipo-arena "Grosa") (coordenadas "43.383.666, -840.575"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "A Corunha") (codigo-concello "15030") (nombre "Orzan-Matadero") (lugar-parroquia "Orzan") (longitud "600") (tipo "Praia aberta") (tipo-arena "Grosa") (coordenadas "43.371.055, -8.404.972"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "A Corunha") (codigo-concello "15030") (nombre "Oza") (lugar-parroquia "") (longitud "110") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.334.675, -8.383.083"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "A Corunha") (codigo-concello "15030") (nombre "Riazor") (lugar-parroquia "Paseo Maritimo") (longitud "600") (tipo "Praia aberta") (tipo-arena "Grosa") (coordenadas "43.368.472, -8.411.639"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "A Corunha") (codigo-concello "15030") (nombre "San Amaro") (lugar-parroquia "Adormideras") (longitud "210") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.381.833, -8.397.055"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Dumbria") (codigo-concello "15034") (nombre "Ezaro") (lugar-parroquia "O Ezaro - O Ezaro (Santa Uxia)") (longitud "730") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.908.278, -9.129.083"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ferrol") (codigo-concello "15406") (nombre "Caranza") (lugar-parroquia "Avenida del Mar ") (longitud "600") (tipo "Praia resgardada") (tipo-arena "Grosa") (coordenadas "4.347.703.822, -8.202.436.911"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ferrol") (codigo-concello "15036") (nombre "A Fragata") (lugar-parroquia "Covas (San Martinho)") (longitud "160") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "435.385, -8.296.833"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ferrol") (codigo-concello "15036") (nombre "Doninhos") (lugar-parroquia "Doninhos - Doninhos (San Roman)") (longitud "1700") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.495.916, -8.319.194"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ferrol") (codigo-concello "15036") (nombre "Esmelle") (lugar-parroquia "Esmelle - Esmelle (San Xoan)") (longitud "160") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "4.353.425, -8.295.527"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ferrol") (codigo-concello "15036") (nombre "San Xurxo") (lugar-parroquia "Vila da Area - San Xurxo da Marinha (San Xurxo)") (longitud "2100") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.526.222, -8.301.806"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "A Laracha") (codigo-concello "15041") (nombre "Caion-Salseiras") (lugar-parroquia "Caion - Caion (Santa Maria do Socorro)") (longitud "800") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.315.639, -8.610.333"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Laxe") (codigo-concello "15117") (nombre "Laxe") (lugar-parroquia "Laxe (Santa Maria)") (longitud "1320") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.217.206, -90.029.587"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Minho") (codigo-concello "15048") (nombre "Perbes") (lugar-parroquia "Minho") (longitud "500") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.376.026, -8.214.917"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Oleiros") (codigo-concello "15058") (nombre "Bastiagueiro") (lugar-parroquia "Perillo - Perillo (Santa Locaia)") (longitud "580") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.340.722, -8.362.361"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Oleiros") (codigo-concello "15058") (nombre "Espinheiro") (lugar-parroquia "") (longitud "310") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.382.777, -83.425"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Oleiros") (codigo-concello "15058") (nombre "Mera") (lugar-parroquia "A Lagoa - Maianca (San Cosme)") (longitud "200") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.379.055, -833.775"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Oleiros") (codigo-concello "15058") (nombre "Porto Naval") (lugar-parroquia "A Aguieira - Dorneda (San Martinho)") (longitud "180") (tipo "Praia resgardada") (tipo-arena "Cantos rodados") (coordenadas "43.353.389, -8.346.555"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Oleiros") (codigo-concello "15058") (nombre "Santa Cristina") (lugar-parroquia "Perillo - Perillo (Santa Locaia)") (longitud "1800") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.339.777, -8.380.083"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ponteceso") (codigo-concello "15068") (nombre "Balares") (lugar-parroquia "Balares - Cospindo (San Tirso)") (longitud "350") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.241.665, -8.945.277"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ponteceso") (codigo-concello "15068") (nombre "Ermida") (lugar-parroquia "Gondomil - Corme Aldea (Santo Adran)") (longitud "200") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.326.389, -8.95"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ponteceso") (codigo-concello "15068") (nombre "Osmo") (lugar-parroquia "O Porto de Corme - Corme Porto (Nosa Senhora dos Remedios)") (longitud "150") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.294.167, -8.902.778"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "As Pontes") (codigo-concello "15320") (nombre "Lago das Pontes") (lugar-parroquia "Vilavella (Santa Maria)") (longitud "400") (tipo "Praia resgardada") (tipo-arena "Grosa") (coordenadas "4.345.491.175, -7.870.142.559"))
-(Playa (provincia "A Corunha") (codigo-provincia "15") (concello "Ribeira") (codigo-concello "15073") (nombre "Coroso") (lugar-parroquia "Santa Uxia de Ribeira") (longitud "700") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "425.675.533, -89.877.643"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Barreiros") (codigo-concello "27793") (nombre "A Pasada") (lugar-parroquia "San Miguel de Reinante") (longitud "300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "4.356.103, -718.279"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Barreiros") (codigo-concello "27005") (nombre "Coto") (lugar-parroquia "San Cosme - San Cosme de Barreiros") (longitud "800") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.564.465, -72.200.447"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Barreiros") (codigo-concello "27792") (nombre "Fontela-Balea") (lugar-parroquia "") (longitud "700") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "4.356.172, -720.108"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Burela") (codigo-concello "27902") (nombre "A Marosa") (lugar-parroquia "Burela (Santa Maria)") (longitud "300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "4.367.486, -7.372.333"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Burela") (codigo-concello "27902") (nombre "O Portelo") (lugar-parroquia "Burela (Santa Maria)") (longitud "700") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.664.399, -73.592.247"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Burela") (codigo-concello "27902") (nombre "Ril") (lugar-parroquia "Burela (Santa Maria)") (longitud "") (tipo "Praia aberta") (tipo-arena "Fina ") (coordenadas "43.671.444, -7.364.583"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Cervo") (codigo-concello "27013") (nombre "O Torno") (lugar-parroquia "San Cibrao - Lieiro (Santa Maria)") (longitud "700") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.698.333, -7.438.889"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Foz") (codigo-concello "27019") (nombre "A Rapadoira") (lugar-parroquia "Foz - Foz (Santiago)") (longitud "270") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.572.025, -7.248.555"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Foz") (codigo-concello "27019") (nombre "Areoura") (lugar-parroquia "") (longitud "120") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.64, -7.344.166"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Foz") (codigo-concello "27019") (nombre "As Polas") (lugar-parroquia "") (longitud "280") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.620.277, -7.318.333"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Foz") (codigo-concello "27019") (nombre "Llas") (lugar-parroquia "") (longitud "760") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.580.277, -7.262.778"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Foz") (codigo-concello "27019") (nombre "Peizas") (lugar-parroquia "") (longitud "540") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "435.875, -727.861"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Ribadeo") (codigo-concello "27051") (nombre "A Praia das Catedrais") (lugar-parroquia "") (longitud "880") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.554.221, -7.155.308"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Ribadeo") (codigo-concello "27051") (nombre "Os Castros-Illas") (lugar-parroquia "A Rochela - A Devesa (Santalla)") (longitud "500") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "4.355.534, -7.132.955"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "O Vicedo") (codigo-concello "27064") (nombre "Abrela") (lugar-parroquia "Abrela - Suegos (Santa Maria)") (longitud "950") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.701.822, -7.612.778"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "O Vicedo") (codigo-concello "27064") (nombre "Xilloi") (lugar-parroquia "Xilloi - O Vicedo (Santo Estevo)") (longitud "940") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.743.777, -7.650.277"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Viveiro") (codigo-concello "27066") (nombre "Area") (lugar-parroquia "Area - Faro (San Xiao)") (longitud "1200") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "43.694.166, -757.611"))
-(Playa (provincia "Lugo") (codigo-provincia "27") (concello "Xove") (codigo-concello "27025") (nombre "Esteiro") (lugar-parroquia "Ceranzos - Xuances (San Pedro)") (longitud "400") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "43.711.944, -7.559.139"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Baiona") (codigo-concello "36300") (nombre "A Ribeira") (lugar-parroquia "Baiona (Santa Maria)") (longitud "170") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.212.164, -884.911"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Baiona") (codigo-concello "36300") (nombre "Barbeira") (lugar-parroquia "Baiona (Santa Maria)") (longitud "220") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.212.393, -884.854"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Baiona") (codigo-concello "36300") (nombre "Cuncheira") (lugar-parroquia "Paseo de Pinzon - Baiona (Santa Maria)") (longitud "75") (tipo "Praia aberta") (tipo-arena "Grosa") (coordenadas "4.212.268, -885.157"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Baiona") (codigo-concello "36300") (nombre "Os Frades ") (lugar-parroquia "Baiona (Santa Maria)") (longitud "80") (tipo "Praia aberta") (tipo-arena "Grosa") (coordenadas "4.212.574, -885.184"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Baiona") (codigo-concello "36308") (nombre "Santa Marta") (lugar-parroquia "") (longitud "250") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.211.455, -883.817"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Bueu") (codigo-concello "36004") (nombre "Area de Bon") (lugar-parroquia "Bon de Arriba - Beluso (Santa Maria)") (longitud "1000") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.314.361, -8.818.888"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Bueu") (codigo-concello "36930") (nombre "Banda de Rio") (lugar-parroquia "Bueu (San Martinho)") (longitud "250") (tipo "Praia resgardada") (tipo-arena "Grosa") (coordenadas "4.232.915, -879.629"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Bueu") (codigo-concello "36004") (nombre "Lagos") (lugar-parroquia "Montemogos - Beluso (Santa Maria)") (longitud "250") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.324.508, -8.825.548"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Bueu") (codigo-concello "36004") (nombre "Lapaman") (lugar-parroquia "") (longitud "800") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.341.944, -87.525"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Bueu") (codigo-concello "36004") (nombre "Portomaior") (lugar-parroquia "Castrelo - Cela (Santa Maria)") (longitud "750") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.334.527, -8.768.388"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Cangas ") (codigo-concello "36008") (nombre "Area Brava") (lugar-parroquia "Vilanova - O Hio (Santo Andre)") (longitud "800") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.291.333, -8.844.889"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Cangas ") (codigo-concello "36008") (nombre "Area Milla") (lugar-parroquia "Balea - Darbo (Santa Maria)") (longitud "150") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.249.916, -8.794.333"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Cangas ") (codigo-concello "36008") (nombre "Limens") (lugar-parroquia "Limens  - O Hio (Santo Andre)") (longitud "500") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.259.972, -8.814.028"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Cangas ") (codigo-concello "36008") (nombre "Menduinha") (lugar-parroquia "Menduinha - Aldan (San Cibran)") (longitud "250") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.295.583, -8.820.249"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Cangas ") (codigo-concello "36008") (nombre "Nerga (Espazo Natural Cabo Home)") (lugar-parroquia "Nerga - O Hio (Santo Andre)") (longitud "1000") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.258.858, -8.840.135"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Cangas ") (codigo-concello "36940") (nombre "Rodeira") (lugar-parroquia "Coiro (San Salvador)") (longitud "900") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.226.100.318, -8.768.608.956"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "A Guarda") (codigo-concello "36023") (nombre "Area Grande") (lugar-parroquia "A Guarda - A Guarda (Santa Maria)") (longitud "300") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.191.025, -8.876.166"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "A Guarda") (codigo-concello "36023") (nombre "O Muinho") (lugar-parroquia "O Muinho - Camposancos (Santa Isabel)") (longitud "2000") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "41.876.444, -8.862.944"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Illa de Arousa") (codigo-concello "36901") (nombre "Area de Secada") (lugar-parroquia "") (longitud "500") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.567.972, -8.887.111"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Illa de Arousa") (codigo-concello "36901") (nombre "Camaxe") (lugar-parroquia " ") (longitud "") (tipo "Praia resgardada") (tipo-arena "Grosa") (coordenadas "42.544.389, -8.867.499"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Marin") (codigo-concello "36026") (nombre "Aguete") (lugar-parroquia "Aguete - Seixo (Nosa Senhora do Carme)") (longitud "920") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.237.386, -8.731.472"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Marin") (codigo-concello "36026") (nombre "Mogor") (lugar-parroquia "O Monte - Mogor (San Xurxo)") (longitud "400") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.385.972, -8.719.416"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Marin") (codigo-concello "36026") (nombre "Portocelo") (lugar-parroquia "O Monte - Mogor (San Xurxo)") (longitud "225") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.390.027, -871.425"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Marin") (codigo-concello "36026") (nombre "Santo do Mar-A Covinha") (lugar-parroquia "Casas - Ardan (Santa Maria)") (longitud "350") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.348.889, -8.751.444"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Moanha") (codigo-concello "36029") (nombre "O Con") (lugar-parroquia "O Con - Tiran (San Xoan)") (longitud "150") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.271.083, -8.740.527"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Poio") (codigo-concello "36041") (nombre "Cabeceira") (lugar-parroquia "Campelo - Poio (San Xoan)") (longitud "200") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.422.453, -86.823"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Ponte Caldelas") (codigo-concello "36043") (nombre "Praia fluvial da Calzada") (lugar-parroquia "Paseo de Manuel Gordo Boullosa - Ponte Caldelas (Santa Eulalia)") (longitud " ") (tipo "") (tipo-arena "") (coordenadas "4.239.131, -8.491.745"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "A Lanzada") (lugar-parroquia "O Grove - Sanxenxo") (longitud "2300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.441.258, -8.872.075"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "A Lapa") (lugar-parroquia "A Lanzada - Noalla (Santo Estevo)") (longitud "250") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.434.313, -88.722.694"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Areas") (lugar-parroquia "Areas - Bordons (San Pedro)") (longitud "350") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.394.638, -8.778.805"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Areas Gordas  ") (lugar-parroquia " ") (longitud "250") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.430.972, -887.261"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Baltar") (lugar-parroquia "Baltar - Adina (Santa Maria)") (longitud "600") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.398.722, -8.822.555"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Bascuas") (lugar-parroquia "Aios - Noalla (Santo Estevo)") (longitud "210") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.404.139, -8.858.139"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Canelas") (lugar-parroquia "Canelas - Adina (Santa Maria)") (longitud "400") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.389.972, -8.831.833"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Canelinhas") (lugar-parroquia "Portonovo - Adina (Santa Maria)") (longitud "100") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.239.186, -882.586"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "De Agra") (lugar-parroquia "Areas - Dorron (San Xoan)") (longitud "260") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.394.619, -87.702.212"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Espinheira") (lugar-parroquia "A Lanzada - Noalla (Santo Estevo)") (longitud "150") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "4.243.871, -887.178"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Foxos") (lugar-parroquia "A Lanzada - Noalla (Santo Estevo)") (longitud "350") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.427.138, -8.873.694"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Major") (lugar-parroquia "") (longitud "600") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.413.694, -8.866.583"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Montalvo") (lugar-parroquia "") (longitud "900") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.398.944, -8.848.194"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Panadeira") (lugar-parroquia "Sanxenxo - Padrinhan (San Xenxo)") (longitud "80") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.400.663, -8.803.876"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Paxarinhas") (lugar-parroquia "Paxarinhas - Adina (Santa Maria)") (longitud "100") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.391.639, -8.844.083"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Pragueira") (lugar-parroquia " ") (longitud "300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.409.472, -8.862.528"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Sanxenxo") (codigo-concello "36051") (nombre "Silgar") (lugar-parroquia "Sanxenxo - Padrinhan (San Xenxo)") (longitud "600") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.401.472, -8.812.917"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "A Punta") (lugar-parroquia "") (longitud "200") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.260.028, -8.697.027"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Argazada") (lugar-parroquia "") (longitud "410") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.215.944, -8.776.055"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Canido") (lugar-parroquia "Canido - Oia (San Miguel)") (longitud "300") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.194.139, -8.796.805"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Carril ") (lugar-parroquia "A Igrexa - Alcabre (Santa Baia)") (longitud "600") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.223.296, -87.655.534"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Fontainha (A Sirenita)") (lugar-parroquia "Breadouro - Coruxo (San Salvador)") (longitud "280") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.199.555, -8.786.416"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "O Vao") (lugar-parroquia "Fontela - Coruxo (San Salvador)") (longitud "800") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.197.222, -8.792.166"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Os Muinhos - Fortinhon") (lugar-parroquia "A Corveira - Saians (San Xurxo)") (longitud "150") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.217.461, -8.813.806"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Rodas (Illas Cies)") (lugar-parroquia "Illas Cies") (longitud "1300") (tipo "Praia aberta") (tipo-arena "Fina") (coordenadas "42.222.916, -8.902.917"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Samil") (lugar-parroquia "Samil - Navia (San Paio)") (longitud "1700") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.221.241, -877.556"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Santa Baia") (lugar-parroquia "") (longitud "230") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.222.312, -876.715"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "Tombo do Gato") (lugar-parroquia "") (longitud "") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.220.083, -8.775.749"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vigo") (codigo-concello "36057") (nombre "O Adro") (lugar-parroquia "Vigo") (longitud "450") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "4.222.649.888, -8.754.172.974"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vilagarcia de Arousa") (codigo-concello "36060") (nombre "Bamio") (lugar-parroquia "O Campanario - Bamio (San Xens)") (longitud "130") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.632.789, -87.626.038"))
-(Playa (provincia "Pontevedra") (codigo-provincia "36") (concello "Vilagarcia de Arousa") (codigo-concello "36060") (nombre "Compostela") (lugar-parroquia "Vilagarcia (Santa Baia)") (longitud "2000") (tipo "Praia resgardada") (tipo-arena "Fina") (coordenadas "42.604.798, -87.695.076"))
+; -------------------------------------------------------------------------------
+; PREGUNTAS
+
+(defrule PreguntarTipoArena
+   "Regla para preguntar sobre el tipo de arena"
+   ?x <- (Preferencias (provincia ?provincia) (tipo-arena nil) (playa-r nil))
+   =>
+   (printout t ?provincia ", ¿te gustaría una playa con arena fina, gruesa o cantos rodados? ")
+   (bind ?respuesta (read))
+   (modify ?x (tipo-arena ?respuesta))
+)
+
+; -------------------------------------------------------------------------------
+; REGLAS DE PREGUNTAS
+; A CORUÑA
+
+; A Coruña - Se *tipo area: fina*, pregunta por *tipo de praia*
+(defrule PreguntarTipoPlayaACoruna_F
+   "Regla para preguntar sobre el tipo de playa en A Coruña"
+   ?x <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo nil) (playa-r nil))
+   =>
+   (printout t "Arena fina en A Coruña, ¿prefieres una playa resguardada o abierta? ")
+   (bind ?respuesta (read))
+   (modify ?x (tipo ?respuesta))
+)
+
+; A Coruña - Se *tipo area: grosa*, pregunta por *tipo de praia*
+(defrule PreguntarTipoPlayaACoruna_G
+   "Regla para preguntar sobre el tipo de playa en A Coruña"
+   ?x <- (Preferencias (provincia corunha) (tipo-arena grosa) (tipo nil) (playa-r nil))
+   =>
+   (printout t "Arena grosa en A Coruña, ¿prefieres una playa resguardada o abierta? ")
+   (bind ?respuesta (read))
+   (modify ?x (tipo ?respuesta))
+)
+
+; A Coruña - Se *tipo area: fina*, *tipo de praia: resgardada*, pregunta por *longitud*
+(defrule PreguntarLongitudACoruna_F_R
+   "Regla para preguntar sobre la longitud de la playa en A Coruña"
+   ?x <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud nil) (playa-r nil))
+   =>
+   (printout t "Arena fina y resguardada en A Coruña, ¿prefieres una playa corta, mediana o larga en longitud? ")
+   (bind ?respuesta (read))
+   (modify ?x (longitud ?respuesta))
+)
+
+; LUGO
+; Lugo - Preguntar lonxitude e despois tipo de praia
+(defrule PreguntarLongitudLugo
+   "Regla para preguntar sobre la longitud de la playa en Lugo"
+   ?x <- (Preferencias (provincia lugo) (longitud nil) (playa-r nil))
+   =>
+   (printout t "¿Prefieres una playa corta, mediana o larga en longitud? ")
+   (bind ?respuesta (read))
+   (modify ?x (longitud ?respuesta))
+)
+
+; Lugo - Con lonxitude respostada, pregunta por *tipo de praia*
+(defrule PreguntarTipoPlayaLugo
+   "Regla para preguntar sobre el tipo de playa en Lugo"
+   ?x <- (Preferencias (provincia lugo) (longitud ~nil) (tipo nil) (playa-r nil))
+   =>
+   (printout t "¿Prefieres una playa resguardada o abierta? ")
+   (bind ?respuesta (read))
+   (modify ?x (tipo ?respuesta))
+)
+
+; PONTEVEDRA
+; Pontevedra - Preguntar tipo de area e despois tipo de praia
+(defrule PreguntarTipoArenaPontevedra
+   "Regla para preguntar sobre el tipo de arena en Pontevedra"
+   ?x <- (Preferencias (provincia pontevedra) (tipo-arena nil) (playa-r nil))
+   =>
+   (printout t "¿Prefieres una playa con arena fina, gruesa o cantos rodados? ")
+   (bind ?respuesta (read))
+   (modify ?x (tipo-arena ?respuesta))
+)
+
+; Pontevedra - Con tipo de area respostada, pregunta por *tipo de praia*
+(defrule PreguntarTipoPlayaPontevedra
+   "Regla para preguntar sobre el tipo de playa en Pontevedra"
+   ?x <- (Preferencias (provincia pontevedra) (tipo-arena ~nil) (tipo nil) (playa-r nil))
+   =>
+   (printout t "¿Prefieres una playa resguardada o abierta? ")
+   (bind ?respuesta (read))
+   (modify ?x (tipo ?respuesta))
+)
+
+; Pontevedra - Con *tipo de area: fina*, calquera tipo de praia, preguntar por *longitud*
+(defrule PreguntarLongitudPontevedra_F
+   "Regla para preguntar sobre la longitud en Pontevedra con tipo de arena fina"
+   ?x <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo ~nil) (longitud nil) (playa-r nil))
+   =>
+   (printout t "¿Prefieres una playa corta, mediana o larga en longitud? ")
+   (bind ?respuesta (read))
+   (modify ?x (longitud ?respuesta))
+)
+
+; -------------------------------------------------------------------------------
+; RECOMENDACIONES
+; A CORUÑA
+(defrule RecomendarACoruna_CR
+   "Regla para recomendar playa en A Coruña con arena de cantos rodados"
+   ?p <- (Preferencias (provincia corunha) (tipo-arena cantos) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Cantos rodados"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarACoruna_F_A
+   "Regla para recomendar playa en A Coruña con arena fina y abierta"
+   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo abierta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Fina") (tipo "Praia aberta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarACoruna_F_R_C
+   "Regla para recomendar playa en A Coruña con arena fina, resguardada y corta"
+   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud corta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Corta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarACoruna_F_R_M
+   "Regla para recomendar playa en A Coruña con arena fina, resguardada y mediana"
+   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud media) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Media"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarACoruna_F_R_L
+   "Regla para recomendar playa en A Coruña con arena fina, resguardada y larga"
+   ?p <- (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud larga) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Larga"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarACoruna_G_A
+   "Regla para recomendar playa en A Coruña con arena gruesa, abierta "
+   ?p <- (Preferencias (provincia corunha) (tipo-arena grosa) (tipo abierta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Grosa") (tipo "Praia aberta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarACoruna_G_R
+   "Regla para recomendar playa en A Coruña con arena gruesa, resguardada "
+   ?p <- (Preferencias (provincia corunha) (tipo-arena grosa) (tipo resguardada) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "A Corunha") (tipo-arena "Grosa") (tipo "Praia resgardada"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+; LUGO
+(defrule RecomendarLugo_A_C
+   "Regla para recomendar playa en Lugo del tipo abierta y longitud corta"
+   ?p <- (Preferencias (provincia lugo) (tipo abierta) (longitud corta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Lugo") (tipo "Praia abierta") (longitud "Corta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar "( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarLugo_A_M
+   "Regla para recomendar playa en Lugo del tipo abierta y longitud media"
+   ?p <- (Preferencias (provincia lugo) (tipo abierta) (longitud media) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Lugo") (tipo "Praia abierta") (longitud "Media"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarLugo_R_M
+   "Regla para recomendar playa en Lugo del tipo resguardada y longitud media"
+   ?p <- (Preferencias (provincia lugo) (tipo resguardada) (longitud media) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Lugo") (tipo "Praia resgardada") (longitud "Media"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarLugo_R_L
+   "Regla para recomendar playa en Lugo del tipo resguardada y longitud larga"
+   ?p <- (Preferencias (provincia lugo) (tipo resguardada) (longitud larga) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Lugo") (tipo "Praia resgardada") (longitud "Larga"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+; PONTEVEDRA
+; Area grosa
+(defrule RecomendarPontevedra_G_A
+   "Regla para recomendar playa en Pontevedra del tipo gruesa y abierta"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena grosa) (tipo abierta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Grosa") (tipo "Praia aberta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarPontevedra_G_R
+   "Regla para recomendar playa en Pontevedra del tipo gruesa y resguardada"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena grosa) (tipo resguardada) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Grosa") (tipo "Praia resgardada"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+; Area fina
+; Area fina - Abierta
+(defrule RecomendarPontevedra_F_A_C
+   "Regla para recomendar playa en Pontevedra del tipo fina, abierta y corta"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo abierta) (longitud corta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia aberta") (longitud "Corta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarPontevedra_F_A_M
+   "Regla para recomendar playa en Pontevedra del tipo fina, abierta y media"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo abierta) (longitud media) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia aberta") (longitud "Media"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarPontevedra_F_A_L
+   "Regla para recomendar playa en Pontevedra del tipo fina, abierta y larga"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo abierta) (longitud larga) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia aberta") (longitud "Larga"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+; Area fina - Resguardada
+(defrule RecomendarPontevedra_F_R_C
+   "Regla para recomendar playa en Pontevedra del tipo fina, resguardada y corta"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud corta) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Corta"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarPontevedra_F_R_M
+   "Regla para recomendar playa en Pontevedra del tipo fina, resguardada y media"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud media) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Media"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+(defrule RecomendarPontevedra_F_R_L
+   "Regla para recomendar playa en Pontevedra del tipo fina, resguardada y larga"
+   ?p <- (Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud larga) (playa-r $?playas))
+   ?x <- (Playa (nombre ?nombre) (lugar-parroquia ?lugar) (concello ?concello) (provincia "Pontevedra") (tipo-arena "Fina") (tipo "Praia resgardada") (longitud "Larga"))
+   (test (not (member$ ?x ?playas)))
+   =>
+   (printout t "Te recomendamos la playa " ?nombre " en " ?lugar " ( " ?concello " )" crlf)
+   (modify ?p (playa-r $?playas ?x))
+)
+
+; SIN RESULTADOS
+(defrule SinResultados
+   "Regla para mostrar mensaje de no hay resultados"
+   ?p <- (Preferencias (provincia ?provincia) (tipo-arena ?arena) (tipo ?tipo) (longitud ?longitud) (playa-r $?playas))
+   (not (Playa (provincia ?provincia) (tipo-arena ?arena) (tipo ?tipo) (longitud ?longitud)))
+   =>
+   (printout t "No hay resultados para tu búsqueda" crlf)
+   (retract ?p)
+)
+
+
+(deffacts DatosIniciales
+(Playa (provincia "A Corunha") (concello "Arteixo") (nombre "A Salsa ") (lugar-parroquia "Repibelo") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Cantos rodados"))
+(Playa (provincia "A Corunha") (concello "Arteixo") (nombre "Area Grande ou Valcovo") (lugar-parroquia "Valcovo - Arteixo (Santiago)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Camarinhas") (nombre "Arou") (lugar-parroquia "Arou - Camelle (O Espirito Santo)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "A Corunha") (nombre "As Lapas") (lugar-parroquia "Paseo Maritimo") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Grosa"))
+(Playa (provincia "A Corunha") (concello "A Corunha") (nombre "Orzan-Matadero") (lugar-parroquia "Orzan") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Grosa"))
+(Playa (provincia "A Corunha") (concello "A Corunha") (nombre "Riazor") (lugar-parroquia "Paseo Maritimo") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Grosa"))
+(Playa (provincia "A Corunha") (concello "A Corunha") (nombre "San Amaro") (lugar-parroquia "Adormideras") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Dumbria") (nombre "Ezaro") (lugar-parroquia "O Ezaro - O Ezaro (Santa Uxia)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Ferrol") (nombre "Caranza") (lugar-parroquia "Avenida del Mar ") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Grosa"))
+(Playa (provincia "A Corunha") (concello "A Laracha") (nombre "Caion-Salseiras") (lugar-parroquia "Caion - Caion (Santa Maria do Socorro)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Laxe") (nombre "Laxe") (lugar-parroquia "Laxe (Santa Maria)") (longitud "Larga") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Minho") (nombre "Perbes") (lugar-parroquia "Minho") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Oleiros") (nombre "Mera") (lugar-parroquia "A Lagoa - Maianca (San Cosme)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Oleiros") (nombre "Porto Naval") (lugar-parroquia "A Aguieira - Dorneda (San Martinho)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Cantos rodados"))
+(Playa (provincia "A Corunha") (concello "Ponteceso") (nombre "Ermida") (lugar-parroquia "Gondomil - Corme Aldea (Santo Adran)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "A Corunha") (concello "Ribeira") (nombre "Coroso") (lugar-parroquia "Santa Uxia de Ribeira") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Barreiros") (nombre "A Pasada") (lugar-parroquia "San Miguel de Reinante") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Barreiros") (nombre "Coto") (lugar-parroquia "San Cosme - San Cosme de Barreiros") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Barreiros") (nombre "Fontela-Balea") (lugar-parroquia "") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Burela") (nombre "A Marosa") (lugar-parroquia "Burela (Santa Maria)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Burela") (nombre "O Portelo") (lugar-parroquia "Burela (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Burela") (nombre "Ril") (lugar-parroquia "Burela (Santa Maria)") (longitud "Corta") (tipo "Praia aberta") (tipo-arena "Fina "))
+(Playa (provincia "Lugo") (concello "Cervo") (nombre "O Torno") (lugar-parroquia "San Cibrao - Lieiro (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Foz") (nombre "A Rapadoira") (lugar-parroquia "Foz - Foz (Santiago)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Foz") (nombre "Areoura") (lugar-parroquia "") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Foz") (nombre "As Polas") (lugar-parroquia "") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Foz") (nombre "Llas") (lugar-parroquia "") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Foz") (nombre "Peizas") (lugar-parroquia "") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Ribadeo") (nombre "A Praia das Catedrais") (lugar-parroquia "") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Ribadeo") (nombre "Os Castros-Illas") (lugar-parroquia "A Rochela - A Devesa (Santalla)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "O Vicedo") (nombre "Abrela") (lugar-parroquia "Abrela - Suegos (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "O Vicedo") (nombre "Xilloi") (lugar-parroquia "Xilloi - O Vicedo (Santo Estevo)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Viveiro") (nombre "Area") (lugar-parroquia "Area - Faro (San Xiao)") (longitud "Larga") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Lugo") (concello "Xove") (nombre "Esteiro") (lugar-parroquia "Ceranzos - Xuances (San Pedro)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Baiona") (nombre "A Ribeira") (lugar-parroquia "Baiona (Santa Maria)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Baiona") (nombre "Barbeira") (lugar-parroquia "Baiona (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Baiona") (nombre "Cuncheira") (lugar-parroquia "Paseo de Pinzon - Baiona (Santa Maria)") (longitud "Corta") (tipo "Praia aberta") (tipo-arena "Grosa"))
+(Playa (provincia "Pontevedra") (concello "Bueu") (nombre "Area de Bon") (lugar-parroquia "Bon de Arriba - Beluso (Santa Maria)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Bueu") (nombre "Banda de Rio") (lugar-parroquia "Bueu (San Martinho)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Grosa"))
+(Playa (provincia "Pontevedra") (concello "Bueu") (nombre "Lagos") (lugar-parroquia "Montemogos - Beluso (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Bueu") (nombre "Portomaior") (lugar-parroquia "Castrelo - Cela (Santa Maria)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Cangas ") (nombre "Area Milla") (lugar-parroquia "Balea - Darbo (Santa Maria)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Cangas ") (nombre "Nerga (Espazo Natural Cabo Home)") (lugar-parroquia "Nerga - O Hio (Santo Andre)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "A Guarda") (nombre "Area Grande") (lugar-parroquia "A Guarda - A Guarda (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "A Guarda") (nombre "O Muinho") (lugar-parroquia "O Muinho - Camposancos (Santa Isabel)") (longitud "Larga") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Marin") (nombre "Santo do Mar-A Covinha") (lugar-parroquia "Casas - Ardan (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Moanha") (nombre "O Con") (lugar-parroquia "O Con - Tiran (San Xoan)") (longitud "Corta") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Poio") (nombre "Cabeceira") (lugar-parroquia "Campelo - Poio (San Xoan)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "A Lanzada") (lugar-parroquia "O Grove - Sanxenxo") (longitud "Larga") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "A Lapa") (lugar-parroquia "A Lanzada - Noalla (Santo Estevo)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "Baltar") (lugar-parroquia "Baltar - Adina (Santa Maria)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "Canelinhas") (lugar-parroquia "Portonovo - Adina (Santa Maria)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "Espinheira") (lugar-parroquia "A Lanzada - Noalla (Santo Estevo)") (longitud "Corta") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "Paxarinhas") (lugar-parroquia "Paxarinhas - Adina (Santa Maria)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Sanxenxo") (nombre "Silgar") (lugar-parroquia "Sanxenxo - Padrinhan (San Xenxo)") (longitud "Media") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Vigo") (nombre "O Vao") (lugar-parroquia "Fontela - Coruxo (San Salvador)") (longitud "Media") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Vigo") (nombre "Os Muinhos - Fortinhon") (lugar-parroquia "A Corveira - Saians (San Xurxo)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Vigo") (nombre "Rodas (Illas Cies)") (lugar-parroquia "Illas Cies") (longitud "Larga") (tipo "Praia aberta") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Vigo") (nombre "Samil") (lugar-parroquia "Samil - Navia (San Paio)") (longitud "Larga") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Vilagarcia de Arousa") (nombre "Bamio") (lugar-parroquia "O Campanario - Bamio (San Xens)") (longitud "Corta") (tipo "Praia resgardada") (tipo-arena "Fina"))
+(Playa (provincia "Pontevedra") (concello "Vilagarcia de Arousa") (nombre "Compostela") (lugar-parroquia "Vilagarcia (Santa Baia)") (longitud "Larga") (tipo "Praia resgardada") (tipo-arena "Fina"))
+)
+
+(deffacts BH
+   ;(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud corta))
+   ;(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud media))
+   ;(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud larga))
+   ;(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo abierta) (longitud larga))
+   ;(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo abierta) (longitud media))
+   ;(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo abierta) (longitud corta))
+   ;(Preferencias (provincia pontevedra) (tipo-arena grosa) (tipo resguardada))
+   ;(Preferencias (provincia pontevedra) (tipo-arena grosa) (tipo abierta))
+   ;(Preferencias (provincia lugo) (tipo resguardada) (longitud media))
+   ;(Preferencias (provincia lugo) (tipo resguardada) (longitud larga))
+   ;(Preferencias (provincia lugo) (tipo abierta) (longitud corta))
+   ;(Preferencias (provincia lugo) (tipo abierta) (longitud media))
+   ;(Preferencias (provincia corunha) (tipo-arena cantos)
+   (Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud corta))
+   ;(Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud media))
+   ;(Preferencias (provincia corunha) (tipo-arena fina) (tipo resguardada) (longitud larga))
+   ;(Preferencias (provincia corunha) (tipo-arena fina) (tipo abierta))
+   ;(Preferencias (provincia corunha) (tipo-arena grosa) (tipo resguardada))
+   ;(Preferencias (provincia corunha) (tipo-arena grosa) (tipo abierta))
+   ;(Preferencias (provincia pontevedra) (tipo-arena cantos)) ;esta non dá resultados
+   ;(Preferencias)
 )

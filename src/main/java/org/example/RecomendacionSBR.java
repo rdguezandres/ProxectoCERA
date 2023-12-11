@@ -21,6 +21,20 @@ public class RecomendacionSBR {
         for (Playa playa : playas) {
             try {
                 String coordenadas = playa.getCoordenadas1() + ", " + playa.getCoordenadas2();
+                if (playa.getLongitud() != "") {
+                    if (Integer.parseInt(playa.getLongitud()) <= 200){
+                        playa.setLongitud("Corta");
+                    }
+                    else if (Integer.parseInt(playa.getLongitud()) > 200 && Integer.parseInt(playa.getLongitud()) <= 1000){
+                        playa.setLongitud("Media");
+                    }
+                    else if (Integer.parseInt(playa.getLongitud()) > 1000){
+                        playa.setLongitud("Larga");
+                    }
+                } else{
+                    playa.setLongitud("Corta");
+                }
+
 
                 // Construir el comando CLIPS para insertar una nueva instancia de la clase Playa
                 String assertCommand = String.format(
@@ -33,12 +47,10 @@ public class RecomendacionSBR {
                 );
 
                 String assertCommand2 = String.format(
-                        "(Playa (provincia \"%s\") (codigo-provincia \"%s\") (concello \"%s\") " +
-                                "(codigo-concello \"%s\") (nombre \"%s\") (lugar-parroquia \"%s\") (longitud \"%s\") " +
-                                "(tipo \"%s\") (tipo-arena \"%s\") (coordenadas \"%s\"))",
-                        playa.getProvincia(), playa.getCodigoProvincia(), playa.getConcello(),
-                        playa.getCodigoConcello(), playa.getNombre(), playa.getLugarParroquia(),
-                        playa.getLongitud(), playa.getTipo(), playa.getTipoArea(), coordenadas
+                        "(Playa (provincia \"%s\") (concello \"%s\") (nombre \"%s\") (lugar-parroquia \"%s\") (longitud \"%s\") " +
+                                "(tipo \"%s\") (tipo-arena \"%s\"))",
+                        playa.getProvincia(), playa.getConcello(),playa.getNombre(), playa.getLugarParroquia(),
+                        playa.getLongitud(), playa.getTipo(), playa.getTipoArea()
                 );
 
                 System.out.println(assertCommand2);
@@ -57,12 +69,12 @@ public class RecomendacionSBR {
     public void limpiarDatos() throws CLIPSException {
         clips.clear();
     }
+
     public void ejecutarSistemaRecomendacion(List<Playa> playas) throws CLIPSException {
         clips.reset();
-        cargarDatosPlayas(playas);
+        //cargarDatosPlayas(playas);
+        clips.assertString("(Preferencias (provincia pontevedra) (tipo-arena fina) (tipo resguardada) (longitud corta))");
         clips.run();
-
-        //
     }
 
     // Otros métodos según sea necesario
