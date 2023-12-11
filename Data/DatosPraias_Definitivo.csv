@@ -1,0 +1,52 @@
+PROVINCIA;CONCELLO;PRAIA;LUGAR E PARROQUIA ;LONXITUDE ;TIPO;TIPO DE AREA;POBOACIÓN
+A Corunha;Arteixo;A Salsa ;Repibelo;Corta;Praia resgardada;Cantos rodados;33076
+A Corunha;Oleiros;Porto Naval;A Aguieira - Dorneda (San Martinho);Corta;Praia resgardada;Cantos rodados;37271
+A Corunha;Arteixo;Area Grande ou Valcovo;Valcovo - Arteixo (Santiago);Media;Praia aberta;Fina;33076
+A Corunha;Dumbria;Ezaro;O Ezaro - O Ezaro (Santa Uxia);Media;Praia aberta;Fina;2909
+A Corunha;Camarinhas;Arou;Arou - Camelle (O Espirito Santo);Media;Praia aberta;Fina;5188
+A Corunha;Oleiros;Mera;A Lagoa - Maianca (San Cosme);Corta;Praia resgardada;Fina;37271
+A Corunha;Ponteceso;Ermida;Gondomil - Corme Aldea (Santo Adran);Corta;Praia resgardada;Fina;5429
+A Corunha;Laxe;Laxe;Laxe (Santa Maria);Larga;Praia resgardada;Fina;2977
+A Corunha;A Laracha;Caion-Salseiras;Caion - Caion (Santa Maria do Socorro);Media;Praia resgardada;Fina;11505
+A Corunha;A Corunha;San Amaro;Adormideras;Media;Praia resgardada;Fina;244700
+A Corunha;Ribeira;Coroso;Santa Uxia de Ribeira;Media;Praia resgardada;Fina;27811
+A Corunha;Minho;Perbes;Minho;Media;Praia resgardada;Fina;6624
+A Corunha;A Corunha;Riazor;Paseo Maritimo;Media;Praia aberta;Grosa;244700
+A Corunha;A Corunha;Orzan-Matadero;Orzan;Media;Praia aberta;Grosa;244700
+A Corunha;A Corunha;As Lapas;Paseo Maritimo;Corta;Praia resgardada;Grosa;244700
+A Corunha;Ferrol;Caranza;Avenida del Mar ;Media;Praia resgardada;Grosa;64158
+Lugo;Ribadeo;A Praia das Catedrais;;Larga;Praia aberta;Fina;9811
+Lugo;Burela;A Marosa;Burela (Santa Maria);Media;Praia aberta;Fina;9430
+Lugo;Barreiros;Coto;San Cosme - San Cosme de Barreiros;Media;Praia aberta;Fina;3020
+Lugo;Foz;As Polas;;Corta;Praia aberta;Fina;10118
+Lugo;O Vicedo;Abrela;Abrela - Suegos (Santa Maria);Media;Praia resgardada;Fina;1665
+Lugo;Viveiro;Area;Area - Faro (San Xiao);Media;Praia resgardada;Fina;15231
+Lugo;Cervo;O Torno;San Cibrao - Lieiro (Santa Maria);Media;Praia resgardada;Fina;4192
+Lugo;Foz;A Rapadoira;Foz - Foz (Santiago);Larga;Praia resgardada;Fina;10118
+Pontevedra;Moanha;O Con;O Con - Tiran (San Xoan);Corta;Praia aberta;Fina;19474
+Pontevedra;Sanxenxo;Espinheira;A Lanzada - Noalla (Santo Estevo);Corta;Praia aberta;Fina;17760
+Pontevedra;Vigo;Rodas (Illas Cies);Illas Cies;Larga;Praia aberta;Fina;292374
+Pontevedra;A Guarda;O Muinho;O Muinho - Camposancos (Santa Isabel);Larga;Praia aberta;Fina;10013
+Pontevedra;Sanxenxo;A Lanzada;O Grove - Sanxenxo;Larga;Praia aberta;Fina;17760
+Pontevedra;Sanxenxo;Silgar;Sanxenxo - Padrinhan (San Xenxo);Media;Praia aberta;Fina;17760
+Pontevedra;Bueu;Area de Bon;Bon de Arriba - Beluso (Santa Maria);Media;Praia aberta;Fina;11978
+Pontevedra;Bueu;Portomaior;Castrelo - Cela (Santa Maria);Media;Praia aberta;Fina;11978
+Pontevedra;Sanxenxo;A Lapa;A Lanzada - Noalla (Santo Estevo);Media;Praia aberta;Fina;17760
+Pontevedra;Cangas ;Area Milla;Balea - Darbo (Santa Maria);Corta;Praia resgardada;Fina;26832
+Pontevedra;Sanxenxo;Paxarinhas;Paxarinhas - Adina (Santa Maria);Corta;Praia resgardada;Fina;17760
+Pontevedra;Vilagarcia de Arousa;Bamio;O Campanario - Bamio (San Xens);Corta;Praia resgardada;Fina;37677
+Pontevedra;Sanxenxo;Canelinhas;Portonovo - Adina (Santa Maria);Corta;Praia resgardada;Fina;17760
+Pontevedra;Baiona;A Ribeira;Baiona (Santa Maria);Corta;Praia resgardada;Fina;12349
+Pontevedra;Vigo;Os Muinhos - Fortinhon;A Corveira - Saians (San Xurxo);Corta;Praia resgardada;Fina;292374
+Pontevedra;Poio;Cabeceira;Campelo - Poio (San Xoan);Corta;Praia resgardada;Fina;17276
+Pontevedra;Vigo;Samil;Samil - Navia (San Paio);Larga;Praia resgardada;Fina;292374
+Pontevedra;Vilagarcia de Arousa;Compostela;Vilagarcia (Santa Baia);Larga;Praia resgardada;Fina;37677
+Pontevedra;Sanxenxo;Baltar;Baltar - Adina (Santa Maria);Media;Praia resgardada;Fina;17760
+Pontevedra;Marin;Santo do Mar-A Covinha;Casas - Ardan (Santa Maria);Media;Praia resgardada;Fina;24034
+Pontevedra;Baiona;Barbeira;Baiona (Santa Maria);Media;Praia resgardada;Fina;12349
+Pontevedra;Vigo;O Vao;Fontela - Coruxo (San Salvador);Media;Praia resgardada;Fina;292374
+Pontevedra;Bueu;Lagos;Montemogos - Beluso (Santa Maria);Media;Praia resgardada;Fina;11978
+Pontevedra;Cangas ;Nerga (Espazo Natural Cabo Home);Nerga - O Hio (Santo Andre);Media;Praia resgardada;Fina;26832
+Pontevedra;A Guarda;Area Grande;A Guarda - A Guarda (Santa Maria);Media;Praia resgardada;Fina;10013
+Pontevedra;Baiona;Cuncheira;Paseo de Pinzon - Baiona (Santa Maria);Corta;Praia aberta;Grosa;12349
+Pontevedra;Bueu;Banda de Rio;Bueu (San Martinho);Media;Praia resgardada;Grosa;11978
