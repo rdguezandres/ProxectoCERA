@@ -15,14 +15,6 @@
    (multislot playa-r (default nil))
 )
 
-(defrule Final
-    ?historial <- (PlayaHistorial (fin si))
-    =>
-    (printout t "Gracias por usar nuestro sistema de recomendación de playas" crlf)
-    (retract ?historial)
-    (halt)
-)
-
 (defrule Preguntar
    "Regla para recomendar similares"
    (declare (salience 10))

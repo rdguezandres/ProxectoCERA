@@ -20,7 +20,7 @@ public class Historial {
 
         try {
             // Cargar reglas desde un archivo CLIPS
-            clips.load("Data/r-hist.clp");
+            clips.load("Data/r-hist-java.clp");
 
             // Leer datos de playas desde un archivo o fuente de datos
             List<Playa> playas = leerDatosPlayas();
@@ -33,7 +33,7 @@ public class Historial {
 
             // Preparar filtro
             String selecNombre = "A Praia das Catedrais";
-            String selecRespuesta = "lar";
+            String selecRespuesta = "c";
             clips.assertString(String.format("(PlayaHistorial (playa_nombre \"%s\") (respuesta %s) (fin nil) (playa-r))",
                     selecNombre, selecRespuesta));
             clips.run();
