@@ -20,7 +20,7 @@ public class Main {
 
         try {
             // Cargar reglas desde un archivo CLIPS
-            clips.load("Data/r-clips-proba.clp");
+            clips.load("Data/r-java.clp");
 
             // Leer datos de playas desde un archivo o fuente de datos
             List<Playa> playas = leerDatosPlayas();
@@ -32,7 +32,12 @@ public class Main {
             PrepararDatosPlayas(playas);
 
             // Preparar filtro
-            clips.assertString("(Preferencias (provincia corunha) (tipo-arena fina) (tipo abierta) (longitud corta))");
+            String selecProvincia = "lugo";
+            String selecTipoArena = "fina";
+            String selecTipo = "abierta";
+            String selecLongitud = "corta";
+            clips.assertString(String.format("(Preferencias (provincia %s) (tipo-arena %s) (tipo %s) (longitud %s))",
+                    selecProvincia, selecTipoArena, selecTipo, selecLongitud));
             clips.run();
 
 
