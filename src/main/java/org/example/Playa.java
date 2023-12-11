@@ -2,59 +2,49 @@ package org.example;
 
 public class Playa {
     private String provincia;
-    private String codigoProvincia;
     private String concello;
-    private String codigoConcello;
     private String nombre;
     private String lugarParroquia;
     private String longitud;
     private String tipo;
     private String tipoArea;
-    private String coordenadas1;
-    private String coordenadas2;
+    private Integer poboacion;
 
 
     // Constructor, getters y setters
-    public Playa(String provincia, String codigoProvincia, String concello, String codigoConcello, String nombre, String lugarParroquia, String longitud, String tipo, String tipoArea, String coordenadas1, String coordenadas2) {
+
+
+    public Playa(String provincia, String concello, String nombre, String lugarParroquia, String longitud, String tipo, String tipoArea, Integer poboacion) {
         this.provincia = provincia;
-        this.codigoProvincia = codigoProvincia;
         this.concello = concello;
-        this.codigoConcello = codigoConcello;
         this.nombre = nombre;
         this.lugarParroquia = lugarParroquia;
         this.longitud = longitud;
         this.tipo = tipo;
         this.tipoArea = tipoArea;
-        this.coordenadas1 = coordenadas1;
-        this.coordenadas2 = coordenadas2;
+        this.poboacion = poboacion;
     }
 
     public Playa(String[] col) {
         this.provincia = col[0];
-        this.codigoProvincia = col[1];
-        this.concello = col[2];
-        this.codigoConcello = col[3];
-        this.nombre = col[4];
-        this.lugarParroquia = col[5];
-        this.longitud = col[6];
-        this.tipo = col[7];
-        this.tipoArea = col[8];
-        this.coordenadas1 = col[9];
-        this.coordenadas2 = col[10];
+        this.concello = col[1];
+        this.nombre = col[2];
+        this.lugarParroquia = col[3];
+        this.longitud = col[4];
+        this.tipo = col[5];
+        this.tipoArea = col[6];
+        this.poboacion = Integer.parseInt(col[7]);
     }
 
     public Playa() {
         this.provincia = "";
-        this.codigoProvincia = "";
         this.concello = "";
-        this.codigoConcello = "";
         this.nombre = "";
         this.lugarParroquia = "";
         this.longitud = "";
         this.tipo = "";
         this.tipoArea = "";
-        this.coordenadas1 = "";
-        this.coordenadas2 = "";
+        this.poboacion = 0;
     }
 
     public String getProvincia() {
@@ -65,28 +55,12 @@ public class Playa {
         this.provincia = provincia;
     }
 
-    public String getCodigoProvincia() {
-        return codigoProvincia;
-    }
-
-    public void setCodigoProvincia(String codigoProvincia) {
-        this.codigoProvincia = codigoProvincia;
-    }
-
     public String getConcello() {
         return concello;
     }
 
     public void setConcello(String concello) {
         this.concello = concello;
-    }
-
-    public String getCodigoConcello() {
-        return codigoConcello;
-    }
-
-    public void setCodigoConcello(String codigoConcello) {
-        this.codigoConcello = codigoConcello;
     }
 
     public String getNombre() {
@@ -129,35 +103,25 @@ public class Playa {
         this.tipoArea = tipoArea;
     }
 
-    public String getCoordenadas1() {
-        return coordenadas1;
+    public Integer getPoboacion() {
+        return poboacion;
     }
 
-    public void setCoordenadas1(String coordenadas1) {
-        this.coordenadas1 = coordenadas1;
-    }
-
-    public String getCoordenadas2() {
-        return coordenadas2;
-    }
-
-    public void setCoordenadas2(String coordenadas2) {
-        this.coordenadas2 = coordenadas2;
+    public void setPoboacion(Integer poboacion) {
+        this.poboacion = poboacion;
     }
 
     @Override
     public String toString() {
         return "Playa{" +
                 "provincia='" + provincia + '\'' +
-                ", codigoProvincia='" + codigoProvincia + '\'' +
                 ", concello='" + concello + '\'' +
-                ", codigoConcello='" + codigoConcello + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", lugarParroquia='" + lugarParroquia + '\'' +
                 ", longitud='" + longitud + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", tipoArea='" + tipoArea + '\'' +
-                ", coordenadas='(" + coordenadas1 + ", " + coordenadas2 + ")" + '\'' +
+                ", poboacion='(" + poboacion + ")" + '\'' +
                 '}';
     }
 }
