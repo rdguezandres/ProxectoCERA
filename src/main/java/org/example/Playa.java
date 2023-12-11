@@ -33,7 +33,9 @@ public class Playa {
         this.longitud = col[4];
         this.tipo = col[5];
         this.tipoArea = col[6];
-        this.poboacion = Integer.parseInt(col[7]);
+        if (col.length > 7) {
+            this.poboacion = Integer.parseInt(col[7]);
+        }
     }
 
     public Playa() {
